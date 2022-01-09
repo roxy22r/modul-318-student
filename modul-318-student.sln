@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SwissTransport", "src\Swiss
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SwissTransportTest", "tests\SwissTransportTest\SwissTransportTest.csproj", "{959C6E54-5B1C-40F5-938A-C57B17451421}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ÖV4-U", "ÖV4-U\ÖV4-U.csproj", "{C7D4CA04-DF52-484B-B04D-BC117FC2F5BA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OEV4U", "ÖV4-U\OEV4U.csproj", "{C7D4CA04-DF52-484B-B04D-BC117FC2F5BA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestOEV4U", "TestÖV4-U\TestOEV4U.csproj", "{981770C0-0CB0-43B1-97DF-C14763D81710}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{C7D4CA04-DF52-484B-B04D-BC117FC2F5BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C7D4CA04-DF52-484B-B04D-BC117FC2F5BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C7D4CA04-DF52-484B-B04D-BC117FC2F5BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{981770C0-0CB0-43B1-97DF-C14763D81710}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{981770C0-0CB0-43B1-97DF-C14763D81710}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{981770C0-0CB0-43B1-97DF-C14763D81710}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{981770C0-0CB0-43B1-97DF-C14763D81710}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
