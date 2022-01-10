@@ -26,9 +26,7 @@ namespace ÖV4_U
 
                 string fromStation = Convert.ToString(tbxFromStation.Text);
                 string toStation = Convert.ToString(tbxToStation.Text);
-                DateTime dateTime=Convert.ToDateTime(InputdateTime.Text);
                 Connections connections = transport.GetConnections(fromStation, toStation);
-                connections.ConnectionList =   filterConnectionByTimr(connections,dateTime);
               
                 departureSchedule(fromStation, toStation, connections);
             }
@@ -44,12 +42,20 @@ namespace ÖV4_U
                     String plattform=connect.From.Platform;
                     string arival =  connect.To.Arrival.Value.ToShortTimeString();
                     string departs = connect.From.Departure.Value.ToShortTimeString();
-              
+                    
+
                     string durration = connect.Duration;
                 this.trainInfoView.Rows.Add(plattform,fromStation,toStation,departs,arival,durration);
             }
             
            
+        }
+        private void getRootStopps() {
+            Task < StationBoardRoot> root=transport.GetStationBoardAsync("Wolfenschiessen","");
+            foreach (StationBoardRoot r in root) { 
+                
+            
+            }
         }
 
         private List<Connection> filterConnectionByTimr(Connections connections,DateTime dateTime) {
@@ -125,8 +131,8 @@ namespace ÖV4_U
 
         }
 
-     
-        }
+      
+    }
 
 
         

@@ -48,9 +48,19 @@
             this.colDurration = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.dgvRoot = new System.Windows.Forms.DataGridView();
+            this.Ort = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.abfahrt = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trainInfoView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.tabControl1.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvRoot)).BeginInit();
             this.SuspendLayout();
             // 
             // btnEnter
@@ -139,10 +149,10 @@
             this.colDeparture,
             this.colArrive,
             this.colDurration});
-            this.trainInfoView.Location = new System.Drawing.Point(12, 397);
+            this.trainInfoView.Location = new System.Drawing.Point(0, 0);
             this.trainInfoView.Name = "trainInfoView";
             this.trainInfoView.RowTemplate.Height = 25;
-            this.trainInfoView.Size = new System.Drawing.Size(965, 298);
+            this.trainInfoView.Size = new System.Drawing.Size(954, 309);
             this.trainInfoView.TabIndex = 12;
             // 
             // colRail
@@ -212,15 +222,71 @@
             this.pictureBox1.TabIndex = 14;
             this.pictureBox1.TabStop = false;
             // 
+            // tabControl1
+            // 
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Location = new System.Drawing.Point(12, 355);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(965, 340);
+            this.tabControl1.TabIndex = 15;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.trainInfoView);
+            this.tabPage1.Location = new System.Drawing.Point(4, 24);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(957, 312);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "tabPage1";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.dgvRoot);
+            this.tabPage2.Location = new System.Drawing.Point(4, 24);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(957, 312);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "tabPage2";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // dgvRoot
+            // 
+            this.dgvRoot.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvRoot.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Ort,
+            this.abfahrt});
+            this.dgvRoot.Location = new System.Drawing.Point(3, 3);
+            this.dgvRoot.Name = "dgvRoot";
+            this.dgvRoot.RowTemplate.Height = 25;
+            this.dgvRoot.Size = new System.Drawing.Size(245, 303);
+            this.dgvRoot.TabIndex = 0;
+            // 
+            // Ort
+            // 
+            this.Ort.HeaderText = "Ort";
+            this.Ort.Name = "Ort";
+            this.Ort.ReadOnly = true;
+            // 
+            // abfahrt
+            // 
+            this.abfahrt.HeaderText = "Abfahrt";
+            this.abfahrt.Name = "abfahrt";
+            this.abfahrt.ReadOnly = true;
+            // 
             // MainFrom
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.ClientSize = new System.Drawing.Size(989, 707);
+            this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.comboBox1);
-            this.Controls.Add(this.trainInfoView);
             this.Controls.Add(this.InputdateTime);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.tbxToStation);
@@ -235,6 +301,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trainInfoView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.tabControl1.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvRoot)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -260,5 +330,11 @@
         private DataGridViewTextBoxColumn colDurration;
         private ComboBox comboBox1;
         private PictureBox pictureBox1;
+        private TabControl tabControl1;
+        private TabPage tabPage1;
+        private TabPage tabPage2;
+        private DataGridView dgvRoot;
+        private DataGridViewTextBoxColumn Ort;
+        private DataGridViewTextBoxColumn abfahrt;
     }
 }
