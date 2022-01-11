@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.btnEnter = new System.Windows.Forms.Button();
+            this.Submit = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
@@ -53,8 +53,8 @@
             this.abfahrt = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.datepicker = new System.Windows.Forms.DateTimePicker();
-            this.tbxFromStation = new System.Windows.Forms.TextBox();
-            this.tbxToStation = new System.Windows.Forms.TextBox();
+            this.tbxFromStation = new System.Windows.Forms.ComboBox();
+            this.tbxToStation = new System.Windows.Forms.ComboBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trainInfoView)).BeginInit();
@@ -65,21 +65,22 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvRoot)).BeginInit();
             this.SuspendLayout();
             // 
-            // btnEnter
+            // Submit
             // 
-            this.btnEnter.Font = new System.Drawing.Font("Segoe UI Historic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnEnter.Location = new System.Drawing.Point(882, 201);
-            this.btnEnter.Name = "btnEnter";
-            this.btnEnter.Size = new System.Drawing.Size(76, 73);
-            this.btnEnter.TabIndex = 2;
-            this.btnEnter.Text = "button1";
-            this.btnEnter.UseVisualStyleBackColor = true;
+            this.Submit.Font = new System.Drawing.Font("Segoe UI Historic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.Submit.Location = new System.Drawing.Point(882, 201);
+            this.Submit.Name = "Submit";
+            this.Submit.Size = new System.Drawing.Size(76, 73);
+            this.Submit.TabIndex = 2;
+            this.Submit.Text = "Submit";
+            this.Submit.UseVisualStyleBackColor = true;
+            this.Submit.Click += new System.EventHandler(this.btnSubmit);
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.DarkSeaGreen;
             this.panel1.Controls.Add(this.label1);
-            this.panel1.Location = new System.Drawing.Point(61, 27);
+            this.panel1.Location = new System.Drawing.Point(345, 34);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(200, 100);
             this.panel1.TabIndex = 3;
@@ -88,7 +89,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI Historic", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(44, 32);
+            this.label1.Location = new System.Drawing.Point(42, 33);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(110, 40);
             this.label1.TabIndex = 0;
@@ -98,7 +99,7 @@
             // 
             this.timepicker.CustomFormat = "hh:mm";
             this.timepicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.timepicker.Location = new System.Drawing.Point(271, 290);
+            this.timepicker.Location = new System.Drawing.Point(544, 290);
             this.timepicker.Name = "timepicker";
             this.timepicker.ShowUpDown = true;
             this.timepicker.Size = new System.Drawing.Size(60, 23);
@@ -168,7 +169,7 @@
             // 
             this.inputSwitch.BackColor = System.Drawing.Color.Transparent;
             this.inputSwitch.Image = global::ÖV4_U.Properties.Resources.circle_arrow;
-            this.inputSwitch.Location = new System.Drawing.Point(383, 201);
+            this.inputSwitch.Location = new System.Drawing.Point(429, 201);
             this.inputSwitch.Name = "inputSwitch";
             this.inputSwitch.Size = new System.Drawing.Size(50, 54);
             this.inputSwitch.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -252,25 +253,29 @@
             // 
             // datepicker
             // 
-            this.datepicker.Location = new System.Drawing.Point(65, 290);
+            this.datepicker.Location = new System.Drawing.Point(345, 290);
             this.datepicker.Name = "datepicker";
             this.datepicker.Size = new System.Drawing.Size(200, 23);
             this.datepicker.TabIndex = 16;
             // 
             // tbxFromStation
             // 
-            this.tbxFromStation.Location = new System.Drawing.Point(105, 175);
+            this.tbxFromStation.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple;
+            this.tbxFromStation.FormattingEnabled = true;
+            this.tbxFromStation.Location = new System.Drawing.Point(75, 212);
             this.tbxFromStation.Name = "tbxFromStation";
-            this.tbxFromStation.Size = new System.Drawing.Size(672, 23);
-            this.tbxFromStation.TabIndex = 17;
-            this.tbxFromStation.KeyUp += new System.Windows.Forms.KeyEventHandler(this.from_SelectedIndexChanged);
+            this.tbxFromStation.Size = new System.Drawing.Size(286, 23);
+            this.tbxFromStation.TabIndex = 21;
+            this.tbxFromStation.TextChanged += new System.EventHandler(this.autoCompleteFrom);
             // 
             // tbxToStation
             // 
-            this.tbxToStation.Location = new System.Drawing.Point(115, 251);
+            this.tbxToStation.FormattingEnabled = true;
+            this.tbxToStation.Location = new System.Drawing.Point(544, 212);
             this.tbxToStation.Name = "tbxToStation";
-            this.tbxToStation.Size = new System.Drawing.Size(662, 23);
-            this.tbxToStation.TabIndex = 18;
+            this.tbxToStation.Size = new System.Drawing.Size(286, 23);
+            this.tbxToStation.TabIndex = 20;
+            this.tbxToStation.TextChanged += new System.EventHandler(this.autoCompleteTo);
             // 
             // MainFrom
             // 
@@ -278,14 +283,14 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(989, 707);
-            this.Controls.Add(this.tbxToStation);
             this.Controls.Add(this.tbxFromStation);
+            this.Controls.Add(this.tbxToStation);
             this.Controls.Add(this.datepicker);
             this.Controls.Add(this.inputSwitch);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.timepicker);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.btnEnter);
+            this.Controls.Add(this.Submit);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "MainFrom";
             this.Text = "ÖV4-U";
@@ -330,7 +335,8 @@
         private PictureBox inputSwitch;
         private DateTimePicker datepicker;
         private TabPage tabPage3;
-        private TextBox tbxFromStation;
-        private TextBox tbxToStation;
+        private Button Submit;
+        private ComboBox tbxFromStation;
+        private ComboBox tbxToStation;
     }
 }

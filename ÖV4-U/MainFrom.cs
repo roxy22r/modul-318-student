@@ -18,13 +18,20 @@ namespace ÖV4_U
         private void Form1_Load(object sender, EventArgs e)
         {
             tbxFromStation.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            tbxFromStation.AutoCompleteSource = AutoCompleteSource.CustomSource;
-            tbxFromStation.AutoCompleteCustomSource = autoCompleteSource;
-
             tbxToStation.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            tbxToStation.AutoCompleteSource = AutoCompleteSource.CustomSource;
-            tbxToStation.AutoCompleteCustomSource = autoCompleteSource;
+           
 
+        }
+        private void btnSubmit(object sender, EventArgs e)
+        {
+                dgvRoot.Rows.Clear();
+                trainInfoView.Rows.Clear();
+            string fromStation = tbxFromStation.Text;
+            string toStation = tbxToStation.Text;
+                Connections connections = transport.GetConnections(fromStation, toStation);
+
+                departureSchedule(fromStation, toStation, connections);
+            setStationBoard(fromStation);
         }
         private void departureSchedule(string fromStation, string toStation, Connections connections)
         {
@@ -36,8 +43,6 @@ namespace ÖV4_U
                 String plattform = connect.From.Platform;
                 string arival = connect.To.Arrival.Value.ToShortTimeString();
                 string departs = connect.From.Departure.Value.ToShortTimeString();
-
-
                 string durration = connect.Duration;
                 this.trainInfoView.Rows.Add(plattform, fromStation, toStation, departs, arival, durration);
             }
@@ -101,35 +106,6 @@ namespace ÖV4_U
         }
 
 
-        private void to_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                string[] d = new string[] { };
-
-                String input = Convert.ToString(tbxToStation.Text);
-                List<Station> stations = new List<Station>();
-                while (input != "")
-                {
-                    stations = stationbyInput(input);
-
-
-                    break;
-                }
-                foreach (Station station in stations)
-                {
-                    d[d.Count()] = station.Name;
-
-                    Thread.Sleep(100);
-                }
-                autoCompleteSource.AddRange(d);
-            }
-            catch
-            {
-            }
-
-        }
-
 
 
         private void SwitchFromToStation(object sender, EventArgs e)
@@ -140,32 +116,40 @@ namespace ÖV4_U
             tbxToStation.Text = fromStation;
         }
 
-        private void from_SelectedIndexChanged(object sender, KeyEventArgs e)
+        private void autoCompleteTo(object sender, EventArgs e)
         {
-            try
+
+            String input = Convert.ToString(tbxToStation.Text);
+            List<Station> stations = new List<Station>();
+            while (input != "")
             {
-                string[] d = new string[] { };
-
-                String input = Convert.ToString(tbxToStation.Text);
-                List<Station> stations = new List<Station>();
-                while (input != "")
-                {
-                    stations = stationbyInput(input);
+                stations = stationbyInput(input);
 
 
-                    break;
-                }
-                foreach (Station station in stations)
-                {
-                    d[d.Count()] = station.Name;
-
-                    Thread.Sleep(100);
-                }
-                autoCompleteSource.AddRange(d);
+                break;
             }
-            catch
+            foreach (Station station in stations)
             {
+                tbxToStation.Items.Add(station.Name);
             }
         }
+        private void autoCompleteFrom(object sender, EventArgs e)
+        {
+
+            String input = Convert.ToString(tbxFromStation.Text);
+            List<Station> stations = new List<Station>();
+            while (input != "")
+            {
+                stations = stationbyInput(input);
+                break;
+            }
+            foreach (Station station in stations)
+            {
+                tbxFromStation.Items.Add(station.Name);
+            }
+        }
+
     }
+
+
 }
