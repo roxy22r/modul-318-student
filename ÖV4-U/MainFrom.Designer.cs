@@ -28,14 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.Submit = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.timepicker = new System.Windows.Forms.DateTimePicker();
             this.backgroundWorker2 = new System.ComponentModel.BackgroundWorker();
-            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.trainInfoView = new System.Windows.Forms.DataGridView();
             this.colRail = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFromStation = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -56,7 +54,6 @@
             this.tbxFromStation = new System.Windows.Forms.ComboBox();
             this.tbxToStation = new System.Windows.Forms.ComboBox();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trainInfoView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.inputSwitch)).BeginInit();
             this.tabControl1.SuspendLayout();
@@ -260,6 +257,7 @@
             // 
             // tbxFromStation
             // 
+            this.tbxFromStation.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.tbxFromStation.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple;
             this.tbxFromStation.FormattingEnabled = true;
             this.tbxFromStation.Location = new System.Drawing.Point(75, 212);
@@ -270,6 +268,10 @@
             // 
             // tbxToStation
             // 
+            this.tbxToStation.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.tbxToStation.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.tbxToStation.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple;
+            this.tbxToStation.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.tbxToStation.FormattingEnabled = true;
             this.tbxToStation.Location = new System.Drawing.Point(544, 212);
             this.tbxToStation.Name = "tbxToStation";
@@ -297,7 +299,6 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trainInfoView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.inputSwitch)).EndInit();
             this.tabControl1.ResumeLayout(false);
@@ -316,7 +317,6 @@
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private DateTimePicker timepicker;
         private System.ComponentModel.BackgroundWorker backgroundWorker2;
-        private BindingSource bindingSource1;
         private DataGridView trainInfoView;
         private DataGridViewTextBoxColumn colRail;
         private DataGridViewTextBoxColumn colFromStation;
