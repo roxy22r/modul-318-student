@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SwissTransportTest", "tests
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OEV4U", "ÖV4-U\OEV4U.csproj", "{C7D4CA04-DF52-484B-B04D-BC117FC2F5BA}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "OEV4-U Installer", "OEV4-U Installer\OEV4-U Installer.vdproj", "{42D83140-A07F-42FE-BA2B-D9E410C0CA72}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,8 @@ Global
 		{C7D4CA04-DF52-484B-B04D-BC117FC2F5BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C7D4CA04-DF52-484B-B04D-BC117FC2F5BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C7D4CA04-DF52-484B-B04D-BC117FC2F5BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{42D83140-A07F-42FE-BA2B-D9E410C0CA72}.Debug|Any CPU.ActiveCfg = Debug
+		{42D83140-A07F-42FE-BA2B-D9E410C0CA72}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
