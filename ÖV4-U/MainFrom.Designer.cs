@@ -51,14 +51,18 @@
             this.colArrive = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDurration = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.inputSwitch = new System.Windows.Forms.PictureBox();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.Karte = new System.Windows.Forms.TabControl();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.webView = new Microsoft.Web.WebView2.WinForms.WebView2();
             this.panel1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRoot)).BeginInit();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trainInfoView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.inputSwitch)).BeginInit();
-            this.tabControl1.SuspendLayout();
+            this.Karte.SuspendLayout();
+            this.tabPage3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.webView)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -290,15 +294,37 @@
             this.inputSwitch.TabStop = false;
             this.inputSwitch.Click += new System.EventHandler(this.SwitchFromToStation);
             // 
-            // tabControl1
+            // Karte
             // 
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Location = new System.Drawing.Point(2, 104);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(989, 607);
-            this.tabControl1.TabIndex = 15;
+            this.Karte.Controls.Add(this.tabPage1);
+            this.Karte.Controls.Add(this.tabPage2);
+            this.Karte.Controls.Add(this.tabPage3);
+            this.Karte.Location = new System.Drawing.Point(2, 104);
+            this.Karte.Name = "Karte";
+            this.Karte.SelectedIndex = 0;
+            this.Karte.Size = new System.Drawing.Size(989, 607);
+            this.Karte.TabIndex = 15;
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.webView);
+            this.tabPage3.Location = new System.Drawing.Point(4, 24);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(981, 579);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Karte";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // webView
+            // 
+            this.webView.CreationProperties = null;
+            this.webView.DefaultBackgroundColor = System.Drawing.Color.White;
+            this.webView.Location = new System.Drawing.Point(6, 6);
+            this.webView.Name = "webView";
+            this.webView.Size = new System.Drawing.Size(965, 561);
+            this.webView.TabIndex = 16;
+            this.webView.ZoomFactor = 1D;
             // 
             // MainFrom
             // 
@@ -307,7 +333,7 @@
             this.BackColor = System.Drawing.Color.LightSteelBlue;
             this.ClientSize = new System.Drawing.Size(989, 707);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.tabControl1);
+            this.Controls.Add(this.Karte);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "MainFrom";
             this.Text = "ÖV4-U";
@@ -320,7 +346,9 @@
             this.tabPage1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trainInfoView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.inputSwitch)).EndInit();
-            this.tabControl1.ResumeLayout(false);
+            this.Karte.ResumeLayout(false);
+            this.tabPage3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.webView)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -352,5 +380,8 @@
         private DataGridViewTextBoxColumn colDurration;
         private PictureBox inputSwitch;
         private TabControl tabControl1;
+        private TabPage tabPage3;
+        private Microsoft.Web.WebView2.WinForms.WebView2 webView;
+        private TabControl Karte;
     }
 }

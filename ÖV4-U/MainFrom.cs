@@ -1,5 +1,6 @@
 using SwissTransport.Core;
 using SwissTransport.Models;
+using Microsoft.Web.WebView2.Core;
 
 
 
@@ -19,6 +20,7 @@ namespace ÖV4_U
         {
             tbxFromStation.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             tbxToStation.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            map("Schweiz");
         }
         private void btnSubmit(object sender, EventArgs e)
         {
@@ -33,6 +35,7 @@ namespace ÖV4_U
              
                 setConnection(fromStation, toStation, connections);
                 setdepartureBoard(fromStation);
+                map(fromStation);
             }
             else {
                 MessageBox.Show("Die Textfelder dürfen nicht leer sein!!!");
@@ -121,6 +124,12 @@ namespace ÖV4_U
                 }
             }
         }
+
+        private void map(String fromStation) {
+           List<Station>station =stationbyInput(fromStation);
+            webView.Source =new Uri("https://www.openstreetmap.org/search?query="+fromStation);
+        }
+
     }
 
 

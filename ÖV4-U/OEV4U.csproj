@@ -30,7 +30,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Resources\" />
+    <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.1072.54" />
   </ItemGroup>
 
 </Project>
