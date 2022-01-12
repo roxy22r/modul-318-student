@@ -1,5 +1,3 @@
-
-
 using SwissTransport.Core;
 using SwissTransport.Models;
 
@@ -10,7 +8,9 @@ namespace ÖV4_U
     public partial class MainFrom : Form
     {
         ITransport transport = new Transport();
-        AutoCompleteStringCollection autoCompleteSource = new AutoCompleteStringCollection();
+
+        public ITransport Transport { get => transport; set => transport = value; }
+
         public MainFrom()
         {
             InitializeComponent();
@@ -19,35 +19,37 @@ namespace ÖV4_U
         {
             tbxFromStation.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             tbxToStation.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-           
-
         }
         private void btnSubmit(object sender, EventArgs e)
         {
-                dgvRoot.Rows.Clear();
-                trainInfoView.Rows.Clear();
             string fromStation = tbxFromStation.Text;
             string toStation = tbxToStation.Text;
-                Connections connections = transport.GetConnections(fromStation, toStation);
+            if (fromStation != "" && toStation != "")
+            {
+                dgvRoot.Rows.Clear();
+                trainInfoView.Rows.Clear();
 
-                departureSchedule(fromStation, toStation, connections);
-            setStationBoard(fromStation);
+                Connections connections = Transport.GetConnections(fromStation, toStation);
+                connections.ConnectionList = filterConnectionByTime(connections);
+                setConnection(fromStation, toStation, connections);
+                setdepartureBoard(fromStation);
+            }
+            else {
+                MessageBox.Show("Die Textfelder dürfen nicht leer sein!!!");
+            }
         }
-        private void departureSchedule(string fromStation, string toStation, Connections connections)
+        private void setConnection(string fromStation, string toStation, Connections connections)
         {
-
             foreach (Connection connect in connections.ConnectionList)
             {
                 fromStation = connect.From.Station.Name;
                 toStation = connect.To.Station.Name;
                 String plattform = connect.From.Platform;
-                string arival = connect.To.Arrival.Value.ToShortTimeString();
-                string departs = connect.From.Departure.Value.ToShortTimeString();
+                string arival = connect.To.Arrival.Value.ToString("dd/MM/yyyy HH:mm");
+                string departs = connect.From.Departure.Value.ToString("dd/MM/yyyy HH:mm");
                 string durration = connect.Duration;
                 this.trainInfoView.Rows.Add(plattform, fromStation, toStation, departs, arival, durration);
             }
-
-
         }
         private StationBoardRoot getRootStopps(String input)
         {
@@ -61,18 +63,13 @@ namespace ÖV4_U
                     break;
                 }
             }
-            return transport.GetStationBoard(mainStation.Name, mainStation.Id);
-
-
-
-
+            return Transport.GetStationBoard(mainStation.Name, mainStation.Id);
         }
 
-        private void setStationBoard(String input)
+        private void setdepartureBoard(String input)
         {
             StationBoardRoot root = getRootStopps(input);
             foreach (StationBoard board in root.Entries)
-
             {
                 dgvRoot.Rows.Add(input, board.To, board.Stop.Departure);
 
@@ -82,11 +79,11 @@ namespace ÖV4_U
         private List<Connection> filterConnectionByTime(Connections connections)
         {
             List<Connection> filtertConnection = new List<Connection>();
-            foreach (Connection connection in connections.ConnectionList)
+            foreach (Connection trainDeparturein  in connections.ConnectionList)
             {
-                if (connection.From.Departure.Value > timepicker.Value)
+                if (trainDeparturein.From.Departure.Value >=timepicker.Value)
                 {
-                    filtertConnection.Add(connection);
+                    filtertConnection.Add(trainDeparturein);
                 }
             }
 
@@ -94,61 +91,52 @@ namespace ÖV4_U
 
         }
 
-
-
-
         private List<Station> stationbyInput(String input)
         {
-            Stations stations = transport.GetStations(input);
-
-            return stations.StationList;
-
+            return Transport.GetStations(input).StationList;
         }
-
-
-
-
         private void SwitchFromToStation(object sender, EventArgs e)
         {
-            String fromStation = Convert.ToString(tbxFromStation.Text);
-            String toStation = Convert.ToString(tbxToStation.Text);
-            tbxFromStation.Text = toStation;
-            tbxToStation.Text = fromStation;
+            String fromStaion=tbxFromStation.Text;
+            tbxFromStation.Text = tbxToStation.Text;
+            tbxToStation.Text = fromStaion;
         }
 
         private void autoCompleteTo(object sender, EventArgs e)
         {
-
-            String input = Convert.ToString(tbxToStation.Text);
-            List<Station> stations = new List<Station>();
-            while (input != "")
-            {
-                stations = stationbyInput(input);
-
-
-                break;
-            }
-            foreach (Station station in stations)
-            {
-                tbxToStation.Items.Add(station.Name);
+            if (tbxToStation.Text!="") {
+                List<Station> stations = new List<Station>();
+                 stations = stationbyInput(tbxToStation.Text);
+                foreach (Station station in stations)
+                {
+                    tbxToStation.Items.Add(station.Name);
+                }
             }
         }
+       
+        private void departureBoard(object sender, EventArgs e)
+        {
+            if (tbxdepartureBoard.Text!="") {
+                setdepartureBoard(tbxdepartureBoard.Text);
+            }
+            else
+            {
+                MessageBox.Show("Die Textfeld darf nicht leer sein!!!");
+            }
+        }
+
         private void autoCompleteFrom(object sender, EventArgs e)
         {
-
-            String input = Convert.ToString(tbxFromStation.Text);
-            List<Station> stations = new List<Station>();
-            while (input != "")
+            if (tbxFromStation.Text != "")
             {
-                stations = stationbyInput(input);
-                break;
-            }
-            foreach (Station station in stations)
-            {
-                tbxFromStation.Items.Add(station.Name);
+                List<Station> stations = new List<Station>();
+                stations = stationbyInput(tbxFromStation.Text);
+                foreach (Station station in stations)
+                {
+                    tbxFromStation.Items.Add(station.Name);
+                }
             }
         }
-
     }
 
 
