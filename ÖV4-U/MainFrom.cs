@@ -29,9 +29,8 @@ namespace ÖV4_U
                 dgvRoot.Rows.Clear();
                 trainInfoView.Rows.Clear();
 
-                Connections connections = Transport.GetConnections(fromStation, toStation);
-                connections.ConnectionList = filterByTime(connections);
-                connections.ConnectionList=filterByDate(connections);
+                Connections connections = Transport.GetConnections(fromStation, toStation,datepicker.Value.Date,timepicker.Value);
+             
                 setConnection(fromStation, toStation, connections);
                 setdepartureBoard(fromStation);
             }
@@ -46,10 +45,9 @@ namespace ÖV4_U
                 fromStation = connect.From.Station.Name;
                 toStation = connect.To.Station.Name;
                 String plattform = connect.From.Platform;
-                string arival = connect.To.Arrival.Value.ToString("dd/MM/yyyy HH:mm");
-                string departs = connect.From.Departure.Value.ToString("dd/MM/yyyy HH:mm");
+                
                 string durration = connect.Duration;
-                this.trainInfoView.Rows.Add(plattform, fromStation, toStation, departs, arival, durration);
+                this.trainInfoView.Rows.Add(plattform, fromStation, toStation, connect.From.Departure.Value, connect.To.Arrival.Value.Date, durration);
             }
         }
      
@@ -63,35 +61,6 @@ namespace ÖV4_U
             }
         }
 
-        private List<Connection> filterByTime(Connections connections)
-        {
-            List<Connection> filtertConnection = new List<Connection>();
-            foreach (Connection trainDeparturein  in connections.ConnectionList)
-            {
-                if (trainDeparturein.From.Departure.Value >=timepicker.Value)
-                {
-                    filtertConnection.Add(trainDeparturein);
-                }
-            }
-
-            return filtertConnection;
-
-        }
-
-        private List<Connection> filterByDate(Connections connections)
-        {
-            List<Connection> filtertConnection = new List<Connection>();
-            foreach (Connection trainDeparturein in connections.ConnectionList)
-            {
-                if (trainDeparturein.From.Departure.Value >= datepicker.Value)
-                {
-                    filtertConnection.Add(trainDeparturein);
-                }
-            }
-
-            return filtertConnection;
-
-        }
 
         private List<Station> stationbyInput(String input)
         {
