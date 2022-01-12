@@ -114,7 +114,7 @@
             this.tbxdepartureBoard.Name = "tbxdepartureBoard";
             this.tbxdepartureBoard.Size = new System.Drawing.Size(286, 23);
             this.tbxdepartureBoard.TabIndex = 22;
-            this.tbxdepartureBoard.Enter += new System.EventHandler(this.departureBoard);
+            this.tbxdepartureBoard.TextChanged += new System.EventHandler(this.autoCompleteDepartureBoard);
             // 
             // dgvRoot
             // 

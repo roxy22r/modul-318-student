@@ -30,7 +30,8 @@ namespace ÖV4_U
                 trainInfoView.Rows.Clear();
 
                 Connections connections = Transport.GetConnections(fromStation, toStation);
-                connections.ConnectionList = filterConnectionByTime(connections);
+                connections.ConnectionList = filterByTime(connections);
+                connections.ConnectionList=filterByDate(connections);
                 setConnection(fromStation, toStation, connections);
                 setdepartureBoard(fromStation);
             }
@@ -51,24 +52,10 @@ namespace ÖV4_U
                 this.trainInfoView.Rows.Add(plattform, fromStation, toStation, departs, arival, durration);
             }
         }
-        private StationBoardRoot getRootStopps(String input)
-        {
-            Station mainStation = new Station();
-            List<Station> stations = stationbyInput(input);
-            foreach (Station station in stations)
-            {
-                if (station.Name.Equals(input))
-                {
-                    mainStation = station;
-                    break;
-                }
-            }
-            return Transport.GetStationBoard(mainStation.Name, mainStation.Id);
-        }
-
+     
         private void setdepartureBoard(String input)
         {
-            StationBoardRoot root = getRootStopps(input);
+            StationBoardRoot root = Transport.GetStationBoard(input,"id");
             foreach (StationBoard board in root.Entries)
             {
                 dgvRoot.Rows.Add(input, board.To, board.Stop.Departure);
@@ -76,12 +63,27 @@ namespace ÖV4_U
             }
         }
 
-        private List<Connection> filterConnectionByTime(Connections connections)
+        private List<Connection> filterByTime(Connections connections)
         {
             List<Connection> filtertConnection = new List<Connection>();
             foreach (Connection trainDeparturein  in connections.ConnectionList)
             {
                 if (trainDeparturein.From.Departure.Value >=timepicker.Value)
+                {
+                    filtertConnection.Add(trainDeparturein);
+                }
+            }
+
+            return filtertConnection;
+
+        }
+
+        private List<Connection> filterByDate(Connections connections)
+        {
+            List<Connection> filtertConnection = new List<Connection>();
+            foreach (Connection trainDeparturein in connections.ConnectionList)
+            {
+                if (trainDeparturein.From.Departure.Value >= datepicker.Value)
                 {
                     filtertConnection.Add(trainDeparturein);
                 }
@@ -134,6 +136,19 @@ namespace ÖV4_U
                 foreach (Station station in stations)
                 {
                     tbxFromStation.Items.Add(station.Name);
+                }
+            }
+        }
+
+        private void autoCompleteDepartureBoard(object sender, EventArgs e)
+        {
+            if (tbxFromStation.Text != "")
+            {
+                List<Station> stations = new List<Station>();
+                stations = stationbyInput(tbxdepartureBoard.Text);
+                foreach (Station station in stations)
+                {
+                    tbxdepartureBoard.Items.Add(station.Name);
                 }
             }
         }
